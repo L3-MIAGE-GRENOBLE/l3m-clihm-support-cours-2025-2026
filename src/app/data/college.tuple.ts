@@ -21,6 +21,6 @@ export function processStringToDataCollege(str: string): DataCollege {
         L[4] === "1",
         L[5] === "1",
         parseInt(L[6]),
-        L[6]
+        L[7]
     ]
 }
