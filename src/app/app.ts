@@ -11,5 +11,13 @@ import { DataProcess } from './services/data-process';
   styleUrl: './app.scss'
 })
 export class App {
-  private readonly dataService = inject(DataProcess);
+  // Injection du service DataProcess (fourni à la racine de l'application)
+  private readonly _dataService = inject(DataProcess);
+
+  // Dérivation d'un signal nbTotalEtablissements qui expose le nombre d'établissements
+
+  
+  // Dérivation d'un signal qui expose les 10 premiers établissements
+
+
 }
