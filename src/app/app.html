@@ -1,6 +1,17 @@
 <h1>Liste des établissements</h1>
 
 <p>On a une liste de {{ nbEtab() }} établissements</p>
+<pre>Page {{ pageCourante() }} (contient {{nbItemsPerPage()}} établissements)</pre>
+<button (click)="previousPage()">Previous</button>
+<button (click)="nextPage()">Next</button>
+
+<select [(ngModel)]="nbItemsPerPage">
+    @for(nb of possibleItemsPerPage; track nb) {
+    <option [value]="nb">
+        {{nb}}
+    </option>
+    }
+</select>
 
 <table>
     <thead>
@@ -23,9 +34,3 @@
     </tbody>
 </table>
 <ol>
-@for(etab of filteredList(); track etab) {
-    <li>
-        {{ etab.patronyme }}
-    </li>
-}
-</ol>
