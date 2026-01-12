@@ -1,2 +1,31 @@
-<h1>Introduction Typescript</h1>
-<pre>Voir la console de développement du navigateur (CTRL-MAJ-i)</pre>
+<h1>Liste des établissements</h1>
+
+<p>On a une liste de {{ nbEtab() }} établissements</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Code</th>
+            <th>Effectif</th>
+            <th>REP</th>
+        </tr>
+    </thead>
+    <tbody>
+    @for(etab of filteredList(); track etab) {
+        <tr>
+            <td>{{ etab.patronyme }}</td>
+            <td>{{ etab.code_postal }}</td>
+            <td>{{ etab.nombre_eleves_total }}</td>
+            <td>{{ etab.rep || etab.rep_plus ? "REP" : "---" }}</td>
+        </tr>
+    }
+    </tbody>
+</table>
+<ol>
+@for(etab of filteredList(); track etab) {
+    <li>
+        {{ etab.patronyme }}
+    </li>
+}
+</ol>

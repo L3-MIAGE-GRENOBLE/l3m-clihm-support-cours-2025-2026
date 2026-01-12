@@ -28,22 +28,22 @@ export class DataProcess {
   
   constructor() {
     console.log("DataProcess::constructor (fichier ./src/app/services/data-process.ts)");
-    const listColleges = strCollegesCSV
+    const listEtablissements = strCollegesCSV
       .split("\n")
       .map(processStringToDataCollege)
       .map(processCollegeFromTuple)
     
     // On peut maintenant écrire dans le signal privé _etablissements
-    this._etablissements.set(listColleges);
+    this._etablissements.set(listEtablissements);
 
     // On affiche dans la console les données traitées, à titre de débuggage provisoire
     console.log(
       "la liste complète:",
-      listColleges,
+      listEtablissements,
       "\nla liste des REP PRIVE",
-      listColleges.filter(e => e.nombre_eleves_total < 50),
+      listEtablissements.filter(e => e.nombre_eleves_total < 50),
       "nombre d'élèves en 2020 :",
-      listColleges.reduce(
+      listEtablissements.reduce(
         (nb, c) => c.rentree_scolaire === 2020 ? nb + c.nombre_eleves_total : nb,
         0
       )

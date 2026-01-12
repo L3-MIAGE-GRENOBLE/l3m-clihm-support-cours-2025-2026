@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { DataProcess } from './services/data-process';
 
@@ -15,9 +15,13 @@ export class App {
   private readonly _dataService = inject(DataProcess);
 
   // Dérivation d'un signal nbTotalEtablissements qui expose le nombre d'établissements
-
+  protected readonly nbEtab = computed(
+    () => this._dataService.etablissements().length
+  )
   
   // Dérivation d'un signal qui expose les 10 premiers établissements
-
+  protected readonly filteredList = computed(
+    () => this._dataService.etablissements().slice(0, 10)
+  )
 
 }
