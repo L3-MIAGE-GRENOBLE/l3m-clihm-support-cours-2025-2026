@@ -1,0 +1,9 @@
+<label>{{ film().title }}</label>
+
+@let urlPoster = film().poster_path;
+
+@if(urlPoster !== null) {
+    <img [src]="urlImage()" />
+} @else {
+    <p>Aucune image disponible</p>
+}

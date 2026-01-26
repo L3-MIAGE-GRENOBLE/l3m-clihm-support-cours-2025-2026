@@ -1,10 +1,26 @@
 <h1>TMDB</h1>
 
-<form>
+<form (submit)="searchMovie()">
     <mat-form-field>
         <mat-label>Film à rechercher</mat-label>
-        <input matInput placeholder="Entrez le nom du film">
+        <input  matInput 
+                placeholder="Entrez le nom du film"
+                [(ngModel)] = "searchQueryString"
+                [ngModelOptions]="{standalone: true}"
+                />
     </mat-form-field>
 </form>
     
 <button mat-raised-button (click)="searchMovie()">Search</button>
+
+
+<hr/>
+
+<p> On a trouvé {{ movies().length }} films</p>
+<ul>
+@for(movie of movies(); track movie.id) {
+    <li>
+        <app-movie [film]="movie"></app-movie>
+    </li>
+}
+</ul>

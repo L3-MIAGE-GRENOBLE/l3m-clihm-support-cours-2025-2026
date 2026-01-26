@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
+import { Movies } from '@data/movie';
+import { parseMovieSearchResult } from '@data/movie-search';
 import { tmdbToken } from '@data/tmdb-token';
 import { firstValueFrom } from 'rxjs';
 
@@ -8,6 +10,8 @@ import { firstValueFrom } from 'rxjs';
 })
 export class Tmdb {
   private readonly _httpClient = inject(HttpClient);
+  private readonly _movies = signal<Movies>([]);
+  public readonly movies = this._movies.asReadonly();
 
   public searchMovies(query: string) {
     const req = this._httpClient.get(
@@ -21,15 +25,19 @@ export class Tmdb {
     );
 
     const response = firstValueFrom(req);
-    console.log('Tmdb promise', response);
+    console.log('Tmdb promise', response);  // A
 
     response.then(
-      data => {
-        console.log('Tmdb promise', response);
-        console.log('Tmdb data', data);
-        // Problème : ici on ne peut pas vérifier le type, la structure, des données reçues
+      parseMovieSearchResult
+    ).then(
+      moviesSearchResult => {
+        this._movies.set(moviesSearchResult.results);
       }
-    );
+    ).catch(
+      err => console.error("Une erreur est survenue lors de la recherche de films :", err)
+    )
+
+    console.log("coucou on a terminé la méthode searchMovies");  // C
   }
 
 }

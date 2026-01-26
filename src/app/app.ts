@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RouterOutlet } from '@angular/router';
 import { Tmdb } from '@services/tmdb';
+import { Movie } from './movie/movie';
 
 @Component({
   selector: 'app-root',
@@ -12,15 +13,20 @@ import { Tmdb } from '@services/tmdb';
     // RouterOutlet
     FormsModule,
     MatFormFieldModule, MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    Movie
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
   private readonly _tmdb = inject(Tmdb);
+  protected readonly movies = this._tmdb.movies;
 
-  searchMovie() {
-    this._tmdb.searchMovies("inception");
+  protected readonly searchQueryString = signal<string>("");
+  
+  protected searchMovie() {
+    this._tmdb.searchMovies(this.searchQueryString());
+    this.searchQueryString.set("");
   }
 }
