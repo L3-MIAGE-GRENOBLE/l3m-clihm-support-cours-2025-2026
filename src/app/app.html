@@ -1,3 +1,10 @@
 <h1>TMDB</h1>
 
-<button (click)="searchMovie('Inception')">Search for Inception</button>
+<form>
+    <mat-form-field>
+        <mat-label>Film à rechercher</mat-label>
+        <input matInput placeholder="Entrez le nom du film">
+    </mat-form-field>
+</form>
+    
+<button mat-raised-button (click)="searchMovie()">Search</button>

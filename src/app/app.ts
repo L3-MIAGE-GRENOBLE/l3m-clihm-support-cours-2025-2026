@@ -1,4 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { RouterOutlet } from '@angular/router';
 import { Tmdb } from '@services/tmdb';
 
@@ -6,6 +10,9 @@ import { Tmdb } from '@services/tmdb';
   selector: 'app-root',
   imports: [
     // RouterOutlet
+    FormsModule,
+    MatFormFieldModule, MatInputModule,
+    MatButtonModule
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
@@ -13,7 +20,7 @@ import { Tmdb } from '@services/tmdb';
 export class App {
   private readonly _tmdb = inject(Tmdb);
 
-  searchMovie(q: string) {
-    this._tmdb.searchMovies(q);
+  searchMovie() {
+    this._tmdb.searchMovies("inception");
   }
 }
